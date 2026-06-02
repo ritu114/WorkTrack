@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KPI Performance Management — Brahmaputra Board</title>
+  <meta name="description" content="Data-driven, transparent KPI Performance Management System for the Brahmaputra Board — HQ and Field Units.">
+  <link rel="stylesheet" href="index.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ═══════════════ LOGIN SCREEN ═══════════════ -->
+<div id="login-screen" style="display:none;">
+  <div class="login-card">
+    <div class="login-logo">🌊</div>
+    <h1>Brahmaputra Board</h1>
+    <p class="subtitle">KPI Performance Management System</p>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="form-group">
+        <label class="form-label">Select User Account</label>
+        <select id="login-user" class="form-select">
+          <option value="U-ADM">Administrator (Admin Access)</option>
+          <option value="U-MGR">Rajiv Kumar Sharma (Manager)</option>
+          <option value="U-EMP">Dinesh Barua (Field Employee)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input id="login-pass" type="password" class="form-input" placeholder="Enter password"
+          value="admin123" onkeydown="if(event.key==='Enter')BB.doLogin()">
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px;">
+          Demo: admin123 | manager123 | emp123
+        </div>
+      </div>
+      <div id="login-error" style="font-size:12px;color:var(--brand-danger);min-height:18px;"></div>
+      <button class="btn btn-primary" onclick="BB.doLogin()" style="width:100%;justify-content:center;padding:12px;">
+        🔐 Login to Dashboard
+      </button>
+    </div>
+
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle);">
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+        <span class="type-badge type-hq">e-Office Integration</span>
+        <span class="type-badge type-field">Field Monitoring</span>
+        <span class="type-badge type-success">Real-time KPI</span>
+      </div>
+      <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px;">
+        Ministry of Jal Shakti &nbsp;|&nbsp; Government of India
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ MAIN APP ═══════════════ -->
+<div id="root" style="display:none;">
+
+  <!-- Sidebar Overlay (mobile) -->
+  <div id="sidebar-overlay" class="sidebar-overlay" onclick="BB.toggleSidebar()"></div>
+
+  <!-- ── Sidebar ─────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <div class="brand-logo">🌊</div>
+      <div class="brand-text">
+        <h2>Brahmaputra Board</h2>
+        <p>KPI Performance System</p>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav" id="sidebar-nav">
+      <!-- Built dynamically by app.js -->
+    </nav>
+
+    <!-- User Card -->
+    <div class="sidebar-footer">
+      <div class="user-card">
+        <div class="user-avatar" id="user-initials">?</div>
+        <div class="user-info">
+          <p id="user-name">User</p>
+          <span id="user-role">role</span>
+        </div>
+        <button class="user-logout" onclick="BB.doLogout()" data-tip="Logout" title="Logout">⎋</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ── Main Wrapper ─────────────────────────── -->
+  <div class="main-wrapper">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <button class="hamburger" onclick="BB.toggleSidebar()">☰</button>
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-date" id="topbar-date"></div>
+      <div class="topbar-actions">
+        <button class="icon-btn" onclick="alert('🔔 No new notifications')" data-tip="Notifications">
+          🔔<span class="notif-dot"></span>
+        </button>
+        <button class="icon-btn" onclick="BB.navigate('kpi-config')" data-tip="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-content">
+      <div id="app">
+        <!-- Views rendered here by JS -->
+        <div class="empty-state" style="margin-top:80px;">
+          <div class="empty-icon">⏳</div>
+          <h3>Loading…</h3>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="padding:12px 24px;border-top:1px solid var(--border-subtle);display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text-muted);">
+      <span>© 2025 Brahmaputra Board — Ministry of Jal Shakti, GoI</span>
+      <span>KPI Performance Management System v1.0</span>
+    </footer>
+  </div>
+</div>
+
+<!-- ═══════════════ SCRIPTS ═══════════════ -->
+<!-- Global namespace bootstrap -->
+<script>window.BB = {};</script>
+
+<!-- Data -->
+<script src="data/mock-data.js"></script>
+
+<!-- Engine -->
+<script src="engine/scoring.js"></script>
+
+<!-- Views -->
+<script src="views/dashboard.js"></script>
+<script src="views/employees.js"></script>
+<script src="views/employee-detail.js"></script>
+<script src="views/teams.js"></script>
+<script src="views/projects.js"></script>
+<script src="views/kpi-config.js"></script>
+<script src="views/my-performance.js"></script>
+
+<!-- App Router -->
+<script src="app.js"></script>
+
+</body>
+</html>
