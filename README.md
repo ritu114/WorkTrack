@@ -42,7 +42,7 @@ Installation
 Clone the repository:
 
 Bash
-git clone [https://github.com/ritu114/brahmaputra-kpi.git](https://github.com/ritu114/brahmaputra-kpi.git)
+git clone [https://github.com/ritu114/WorkTrack.git](https://github.com/ritu114/WorkTrack.git)
 Navigate into the project directory:
 
 Bash
